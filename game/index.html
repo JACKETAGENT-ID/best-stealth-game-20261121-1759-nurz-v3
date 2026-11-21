@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Night at the Halcyon Gallery — a stealth game</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: #07080f; color: #e8e2d0;
+    font-family: Georgia, 'Times New Roman', serif;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  header { text-align: center; padding: 14px 10px 4px; }
+  header h1 { margin: 0; font-size: 26px; letter-spacing: 2px; color: #f4d47c; font-weight: normal; }
+  header p { margin: 4px 0 0; font-size: 13px; color: #9a94a8; font-style: italic; }
+  #hud {
+    width: 960px; max-width: 96vw; display: flex; gap: 18px; align-items: center;
+    justify-content: space-between; padding: 8px 4px; font-size: 14px;
+  }
+  #hud .loot { color: #f4d47c; letter-spacing: 1px; }
+  #hud .objective { color: #b9b2c4; font-style: italic; }
+  #detectWrap { display: flex; align-items: center; gap: 8px; }
+  #detectLabel { color: #c9a0a0; font-size: 12px; letter-spacing: 1px; }
+  #detectBar { display: block; width: 180px; height: 12px; background: #1c1620; border: 1px solid #4a3444; border-radius: 6px; overflow: hidden; }
+  #detectFill { display: block; height: 100%; width: 0%; background: #3fae5a; transition: width 0.12s linear, background 0.2s; }
+  #timer { color: #9fc3e8; font-variant-numeric: tabular-nums; }
+  #stage { position: relative; width: 960px; max-width: 96vw; }
+  canvas {
+    display: block; width: 100%; height: auto; background: #0b0d16;
+    border: 1px solid #3a3348; border-radius: 4px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  }
+  #banner {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    text-align: center; background: rgba(5,6,12,0.88); border: 1px solid #f4d47c;
+    border-radius: 8px; padding: 22px 30px; max-width: 80%; display: none;
+  }
+  #banner h2 { margin: 0 0 8px; color: #f4d47c; font-weight: normal; letter-spacing: 2px; }
+  #banner p { margin: 6px 0; font-size: 14px; color: #d8d2c2; }
+  #banner .keys { color: #9a94a8; font-size: 12px; }
+  footer { padding: 10px; font-size: 12px; color: #6f6a80; text-align: center; max-width: 960px; }
+  footer b { color: #9a94a8; }
+</style>
+</head>
+<body>
+<header>
+  <h1>NIGHT AT THE HALCYON GALLERY</h1>
+  <p>A quiet heist. Three treasures. Four wardens who never blink — almost.</p>
+</header>
+<div id="hud">
+  <span class="loot" id="lootLine">Treasures 0 / 3</span>
+  <span class="objective" id="objectiveLine">Slip past the wardens, take the treasures, leave unseen.</span>
+  <span id="detectWrap"><span id="detectLabel">SEEN</span><span id="detectBar"><span id="detectFill"></span></span></span>
+  <span id="timer">00:00</span>
+</div>
+<div id="stage">
+  <canvas id="game" width="960" height="640"></canvas>
+  <div id="banner"><h2 id="bannerTitle"></h2><p id="bannerText"></p><p class="keys" id="bannerKeys"></p></div>
+</div>
+<footer>
+  <b>WASD / arrows</b> move &nbsp;·&nbsp; <b>Shift</b> sneak (slow, quiet, harder to spot) &nbsp;·&nbsp;
+  <b>R</b> retry after being caught &nbsp;·&nbsp; <b>M</b> mute &nbsp;·&nbsp;
+  Vitrines block sight. Laser beams blink on and off — cross them dark. Cameras sweep. Reach the green door with all three treasures.
+</footer>
+<script type="module" src="./src/boot.js"></script>
+</body>
+</html>
